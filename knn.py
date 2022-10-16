@@ -141,16 +141,16 @@ def euclidean_distance(vector1, vector2):
 def get_nearest_neighbors(example_set, query, k):
     # TODO
     distances = list()
-    for train_row in example_set:
-        dist = euclidean_distance(query, train_row)
-        distances.append((train_row, dist))
-    
-    distances.sort(key=lambda tup: tup[1])
-    idx_of_nearest = list()
-
+    idx = 0
+    for training_row in example_set:
+        dist = euclidean_distance(query, training_row)
+        distances.append((idx, training_row, dist))
+        idx += 1
+    distances.sort(key=lambda tup: tup[2])
+    neighbors_idx = list()
     for i in range(k):
-        idx_of_nearest.append(distances[i][0])
-    return idx_of_nearest # neighbors we are returning
+        neighbors_idx.append(distances[i][0])
+    return neighbors_idx # indices we are returning
 
 ######################################################################
 # Q7 knn_classify_point 
