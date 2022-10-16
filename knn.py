@@ -130,22 +130,27 @@ def main():
 #   idx_of_nearest --   a k-by- list of indices for the nearest k
 #                       neighbors of the query point
 ######################################################################
+# Helper function
+# Calculates the Euclidean distance between two vectors
+def euclidean_distance(vector1, vector2):
+    distance = 0.0
+    for i in range(len(vector1)-1):
+        distance += (vector1[i] - vector2[i])**2
+    return np.sqrt(distance)
 
-# k-Nearest Neighbors
-# Step 1: Calculate Euclidean Distance
-# Step 2: Get Nearest Neighbors
-# Step 3: Make Predictions
 def get_nearest_neighbors(example_set, query, k):
     # TODO
-
-    # Wrong
-
-    # Query: 1 by d vector representing a single example
-    idx_of_nearest = 0
-
+    distances = list()
+    for train_row in example_set:
+        dist = euclidean_distance(query, train_row)
+        distances.append((train_row, dist))
     
-    return idx_of_nearest  
+    distances.sort(key=lambda tup: tup[1])
+    idx_of_nearest = list()
 
+    for i in range(k):
+        idx_of_nearest.append(distances[i][0])
+    return idx_of_nearest # neighbors we are returning
 
 ######################################################################
 # Q7 knn_classify_point 
@@ -169,10 +174,12 @@ def get_nearest_neighbors(example_set, query, k):
 
 def knn_classify_point(examples_X, examples_y, query, k):
     #TODO
+    # Making predictions now
+    neighbors = get_nearest_neighbors(examples_X, query, k)
+    output_values = examples_y
+    print(output_values)
+    predicted_label = max(set(examples_y), key=examples_y.count)
     return predicted_label
-
-
-
 
 ######################################################################
 # Q8 cross_validation 
