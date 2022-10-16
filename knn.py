@@ -171,14 +171,25 @@ def get_nearest_neighbors(example_set, query, k):
 #   predicted_label --   either 0 or 1 corresponding to the predicted
 #                        class of the query based on the neighbors
 ######################################################################
-
 def knn_classify_point(examples_X, examples_y, query, k):
     #TODO
     # Making predictions now
+    
+    ## Get the kNN list base on k
     neighbors = get_nearest_neighbors(examples_X, query, k)
-    output_values = examples_y
-    print(output_values)
-    predicted_label = max(set(examples_y), key=examples_y.count)
+    print(neighbors)
+    
+    # Create a new list for nearest neighbors
+    nearest_neighbors = list()
+    
+    ## Retrieving the outcome of the nearest neighbors based on value
+    for neighbor_idx in neighbors:
+        nearest_neighbors.append(examples_y[neighbor_idx][0])
+    
+    print(nearest_neighbors)
+    ## Get the mode from this predicted_label
+    predicted_label = max(set(nearest_neighbors), key=nearest_neighbors.count)
+    
     return predicted_label
 
 ######################################################################
@@ -196,9 +207,19 @@ def knn_classify_point(examples_X, examples_y, query, k):
 #   avg_val_acc --      the average validation accuracy across the folds
 #   var_val_acc --      the variance of validation accuracy across the folds
 ######################################################################
-
 def cross_validation(train_X, train_y, num_folds=4, k=1):
     #TODO
+    # Split the training set into K equally-sized subsets
+    np.split(train_X, num_folds)
+
+    # For each subset i:
+    for i in number_of_subsets():
+        # Combine all subsets except i
+
+        # Evaluate the model on subset i
+        
+    # Compute average performance over these K train/evaluation runs
+    avg_val_acc = 
     return avg_val_acc, varr_val_acc
 
 
