@@ -210,11 +210,12 @@ def knn_classify_point(examples_X, examples_y, query, k):
 def cross_validation(train_X, train_y, num_folds=4, k=1):
     #TODO
     # Split the training set into K equally-sized subsets
-    np.split(train_X, num_folds)
+    subset = np.split(train_X, num_folds)
 
     # For each subset i:
-    for i in number_of_subsets():
+    for i in subset:
         # Combine all subsets except i
+
 
         # Evaluate the model on subset i
         
